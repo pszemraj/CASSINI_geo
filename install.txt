@@ -1,0 +1,6 @@
+
+
+follow this
+
+https://python.plainenglish.io/installing-gdal-with-python-binders-ce41c641808f
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal

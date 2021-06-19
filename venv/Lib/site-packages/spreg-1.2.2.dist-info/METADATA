@@ -1,0 +1,77 @@
+Metadata-Version: 2.1
+Name: spreg
+Version: 1.2.2
+Summary: PySAL Spatial Econometrics Package
+Home-page: https://github.com/pysal/spreg
+Maintainer: PySAL Developers
+Maintainer-email: pysal-dev@googlegroups.com
+License: BSD
+Download-URL: https://pypi.python.org/pypi/spreg
+Keywords: spatial statistics
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: GIS
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
+Requires-Dist: scipy (>=0.11)
+Requires-Dist: numpy (>=1.3)
+Requires-Dist: pandas
+Requires-Dist: libpysal (>=4.0.0)
+Provides-Extra: docs
+Requires-Dist: sphinx (>=1.4.3) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-bibtex ; extra == 'docs'
+Requires-Dist: sphinx-bootstrap-theme (>=0.7.0) ; extra == 'docs'
+Requires-Dist: numpydoc ; extra == 'docs'
+Requires-Dist: nbsphinx ; extra == 'docs'
+Provides-Extra: plus
+Requires-Dist: matplotlib (>=1.5.1) ; extra == 'plus'
+Requires-Dist: seaborn (>=0.7.0) ; extra == 'plus'
+Requires-Dist: geopandas (>=0.2) ; extra == 'plus'
+Requires-Dist: scikit-learn (>=0.17.1) ; extra == 'plus'
+Requires-Dist: bokeh (>=0.11.1) ; extra == 'plus'
+Requires-Dist: geojson (>=1.3.2) ; extra == 'plus'
+Requires-Dist: folium (>=0.2.1) ; extra == 'plus'
+Requires-Dist: mplleaflet (>=0.0.5) ; extra == 'plus'
+Requires-Dist: statsmodels (>=0.6.1) ; extra == 'plus'
+Requires-Dist: numba ; extra == 'plus'
+Requires-Dist: numexpr ; extra == 'plus'
+Requires-Dist: watermark ; extra == 'plus'
+Provides-Extra: tests
+Requires-Dist: codecov ; extra == 'tests'
+Requires-Dist: coverage ; extra == 'tests'
+Requires-Dist: pytest ; extra == 'tests'
+Requires-Dist: pytest-cov ; extra == 'tests'
+Requires-Dist: twine ; extra == 'tests'
+Requires-Dist: wheel ; extra == 'tests'
+
+# spreg
+
+[![unittests](https://github.com/pysal/spreg/workflows/.github/workflows/unittests.yml/badge.svg)](https://github.com/pysal/spreg/actions?query=workflow%3A.github%2Fworkflows%2Funittests.yml)
+[![codecov](https://codecov.io/gh/pysal/spreg/branch/master/graph/badge.svg?token=9VrJpIYIl3)](https://codecov.io/gh/pysal/spreg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/spreg)
+![PyPI](https://img.shields.io/pypi/v/spreg)
+![Conda (channel only)](https://img.shields.io/conda/vn/conda-forge/spreg)
+![GitHub commits since latest release (branch)](https://img.shields.io/github/commits-since/pysal/spreg/latest)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4421373.svg)](https://zenodo.org/record/4421373)
+
+## PySAL Spatial Econometrics Package
+
+`spreg`, short for “spatial regression,” is a Python package to estimate simultaneous autoregressive spatial regression models. These models are useful when modeling processes where observations interact with one another. 
+This package is part of a [refactoring of PySAL](https://github.com/pysal/pysal/wiki/PEP-13:-Refactor-PySAL-Using-Submodules)
+
+## License information
+
+See the file "LICENSE.txt" for information on the history of this
+software, terms & conditions for usage, and a DISCLAIMER OF ALL
+WARRANTIES.
+
+
+

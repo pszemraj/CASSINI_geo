@@ -1,0 +1,45 @@
+Metadata-Version: 2.1
+Name: access
+Version: 1.1.3
+Summary: Calculate spatial accessibility metrics.
+Home-page: https://access.readthedocs.io/en/latest/
+Maintainer: James Saxon
+Maintainer-email: jsaxon@uchicago.edu
+License: 3-Clause BSD
+Keywords: spatial statistics access
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: GIS
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Description-Content-Type: text/markdown
+Requires-Dist: numpy (>=1.3)
+Requires-Dist: pandas (>=0.23.4)
+Provides-Extra: docs
+Requires-Dist: Sphinx (==2.4.3) ; extra == 'docs'
+Requires-Dist: sphinxcontrib-bibtex (==0.4.2) ; extra == 'docs'
+Requires-Dist: sphinx-bootstrap-theme ; extra == 'docs'
+Requires-Dist: numpydoc ; extra == 'docs'
+Provides-Extra: tests
+Requires-Dist: nose ; extra == 'tests'
+Requires-Dist: nose-progressive ; extra == 'tests'
+Requires-Dist: nose-exclude ; extra == 'tests'
+Requires-Dist: coverage ; extra == 'tests'
+Requires-Dist: coveralls ; extra == 'tests'
+Requires-Dist: matplotlib ; extra == 'tests'
+Requires-Dist: scipy (>=0.11) ; extra == 'tests'
+
+# Spatial Access
+
+This package provides classical and novel measures of spatial accessibility to services.
+
+For full documentation, see [access.readthedocs.io](https://access.readthedocs.io/en/latest/).
+
+
+
