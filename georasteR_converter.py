@@ -2,7 +2,7 @@
 now using
 https://towardsdatascience.com/reading-and-visualizing-geotiff-images-with-python-8dcca7a74510
 https://github.com/GeoUtils/georaster/blob/master/georaster/georaster.py
-
+https://rasterio.readthedocs.io/en/latest/topics/color.html
 """
 
 import os
