@@ -4,8 +4,9 @@ ve code simply create a jpg file with band 1 scaled into byte range. You could a
 The above worked well for me except the JPEG resolution wasn't great. Swapping JPEG to PNG worked better.
 
 https://gdal.org/programs/gdal_translate.html
-
+https://gdal.org/programs/gdal_translate.html
 """
+import gc
 import os
 import pprint as pp
 import time
@@ -13,15 +14,19 @@ from datetime import datetime
 from os import listdir
 from os.path import join, isfile
 
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import rasterio
+import rasterio.mask
 import wordninja
 from cleantext import clean
 from natsort import natsorted
-from osgeo import gdal
 from tqdm import tqdm
 
 tif_dir_path = str(input("Enter path to folder with geotiff files -->"))
 # -----------------------------------------------------------------
-output_folder_name = "converted_to_image"
+output_folder_name = "full_color_PNGs_geotiff2png"
 if not os.path.isdir(join(tif_dir_path, output_folder_name)):
     os.mkdir(join(tif_dir_path, output_folder_name))
     # make a place to store outputs if one does not exist
@@ -56,6 +61,7 @@ def cleantxt_wrap(ugly_text):
                          replace_with_currency_symbol="<CUR>",
                          lang="en"  # set to 'de' for German special handling
                          )
+
     return cleaned_text
 
 
@@ -87,6 +93,43 @@ def beautify_filename(filename, num_words=20, start_reverse=False,
 
 # ----------------------------------------------------------------------------
 
+def load_landsat_image_single(imgpath):
+    # ONLY USEFUL IF BANDS ARE IN DIFFERENT FILE
+    image = {}
+    datboi = rasterio.open(imgpath)
+    bands = datboi.indexes
+    for band in bands:
+        # considering the landsat images end with *_SR_B#.TIF, we will use it to locate the correct file
+        this_label = "B" + str(band)
+        image.update({this_label: datboi.read(band)})
+
+    return image
+
+
+def convert_tif_to_png_v2(full_input_path, output_folder, download_pic=False):
+    img = load_landsat_image_single(full_input_path)
+    basename = beautify_filename(os.path.basename(full_input_path))
+
+    # stack the layers to create a cube
+    rgb = np.stack([img['B4'], img['B3'], img['B2']], axis=-1)
+
+    # normalize the values
+    rgb = rgb / rgb.max() * 2
+
+    # display the image with a slightly increased figure size
+    plt.figure(figsize=(10, 10), tight_layout=True, clear=True)
+    plt.imshow(rgb, norm=matplotlib.colors.Normalize(), interpolation="lanczos")
+
+    plt.title(os.path.basename(full_input_path))
+    outname = "[conv to pretty image]" + basename + ".png"
+    plt.savefig(join(output_folder, outname), dpi=300, facecolor='w', edgecolor='w',
+                transparent=True, bbox_inches="tight")
+    plt.close()
+
+
+# ----------------------------------------------------------------------------
+
+
 # load files
 files_to_munch = natsorted([f for f in listdir(tif_dir_path) if isfile(os.path.join(tif_dir_path, f))])
 total_files_1 = len(files_to_munch)
@@ -103,32 +146,25 @@ for prefile in files_to_munch:
 print("out of {0:3d} file(s) originally in the folder, ".format(total_files_1),
       "{0:3d} non-tif_image files were removed".format(removed_count_1))
 print('\n {0:3d} tif_image file(s) in folder will be transcribed.'.format(len(approved_files)))
-pp.pprint(approved_files)
-
-# ----------------------------------------------------------------------------
-options_list = [
-    '-ot Byte',
-    '-of PNG',
-    '-b 1 -b 2 -b 3 -mask 4',
-    '-scale'
-]
-
-options_string = " ".join(options_list)
-
+pp.pprint(approved_files[:10])
+print("...\n")
 # loop
 st = time.time()
+verbose = False
 for tif_file in tqdm(approved_files, total=len(approved_files),
                      desc="Resizing tif_images"):
     index_pos = approved_files.index(tif_file)
-    out_name = beautify_filename(tif_file) + "converted_nr_{}_".format(index_pos) + ".png"
-    gdal.Translate(
-        join(output_path_full, out_name),
-        join(tif_dir_path, tif_file),
-        options=options_string
-    )
 
+    try:
+        convert_tif_to_png_v2(join(tif_dir_path, tif_file), output_path_full)
+    except:
+        print("was unable to process the file {}. moving to next one".format(tif_file))
+
+    if index_pos % 5 == 0:
+        gc.collect()
 
 rt = round((time.time() - st) / 60, 2)
 print("\n\nfinished converting all tif_images - ", datetime.now())
 print("Converted {} tif_images in {} minutes".format(len(approved_files), rt))
+print("they are located in: \n", output_path_full)
 print("they are located in: \n", output_path_full)
