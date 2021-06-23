@@ -154,7 +154,6 @@ def interpret_color_3(input_path, tif_filename, output_path, verbose=False):
         dst.write(src.read())
     dst2 = rasterio.open(converted_loc)
     ax = show(dst2, adjust='linear')
-    ax.
     # ax
     plt.savefig(join(output_path, out_base + ".png"))
     if verbose: print("finished - ", datetime.now())

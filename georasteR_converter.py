@@ -13,11 +13,11 @@ from os import listdir
 from os.path import join, isfile
 
 import georaster
-from osgeo import gdal
 import matplotlib.pyplot as plt
 import wordninja
 from cleantext import clean
 from natsort import natsorted
+from osgeo import gdal
 from tqdm import tqdm
 
 tif_dir_path = str(input("Enter path to folder with geotiff files -->"))
@@ -107,9 +107,6 @@ def convert_tiff_to_png_georasters(input_path, output_path, verbose=False):
         gd_img.GetStatistics(True, True)
         # stats about image
         img.GetStatistics(True, True)
-
-
-
 
 
 # ----------------------------------------------------------------------------

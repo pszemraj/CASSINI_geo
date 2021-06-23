@@ -1,5 +1,4 @@
 import os
-import gdal
 
 print("Copy file path or drag file into terminal window, then press enter.")
 infile = input("Input file:")

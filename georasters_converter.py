@@ -14,7 +14,6 @@ from os import listdir
 from os.path import join, isfile
 
 import geoutils as gu
-import matplotlib.pyplot as plt
 import wordninja
 from cleantext import clean
 from natsort import natsorted
@@ -96,10 +95,9 @@ def convert_tiff_to_png_georasters(input_path, output_path, verbose=False):
 
     if verbose: print(image)
 
-    image.save(output_path, driver = "PNG", co_opts={'TILED':'YES', 'COMPRESS':'LZW'} )
+    image.save(output_path, driver="PNG", co_opts={'TILED': 'YES', 'COMPRESS': 'LZW'})
 
     if verbose: print("saved - ", datetime.now())
-
 
 
 # ----------------------------------------------------------------------------

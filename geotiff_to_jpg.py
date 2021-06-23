@@ -133,7 +133,6 @@ for tif_file in tqdm(approved_files, total=len(approved_files),
         options=options_string_tif
     )
 
-
 rt = round((time.time() - st) / 60, 2)
 print("\n\nfinished converting all tif_images - ", datetime.now())
 print("Converted {} tif_images in {} minutes".format(len(approved_files), rt))
